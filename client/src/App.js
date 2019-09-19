@@ -245,23 +245,50 @@ class App extends React.Component {
       ]
     }
   }
-//could possibly add if statement here once we have 
+  componentDidMount = () => {
+    this.getWinesFromServer()
+  }
 
- addNewWine = (createdWine) => {
-  let drinks = {...this.state.drinks}
-  drinks.wine.push(createdWine)
-  this.setState({drinks})
- }
- addNewBeer = (createdBeer) => {
-   let drinks = {...this.state.drinks}
-   drinks.beer.push(createdBeer)
-   this.setState({drinks})
- }
- addNewCocktail = (createdCocktail) => {
-  let drinks = {...this.state.drinks}
-  drinks.cocktails.push(createdCocktail)
-  this.setState({drinks})
-}
+  getWinesFromServer = () => {
+    fetch('/wine')
+      .then(res => res.json())
+      .then(listOfWines => {
+        this.setWineList(listOfWines)
+      })
+      console.log(fetch('/wine').then(res => res.json()))
+  }
+
+  setWineList = (list) => {
+    let drinks = {...this.state.drinks}
+    drinks.wine = list;
+    this.setState({ drinks })
+  }
+
+  sendNewWineToServer = (newWine) => {
+    fetch('/wine',
+      {
+        method: 'POST'
+      , body: JSON.stringify(newWine)
+      , headers: { 'Content-Type': 'application/json'}
+      }
+    ).then(() => this.getWinesFromServer())
+  }
+
+//  addNewWine = (createdWine) => {
+//   let drinks = {...this.state.drinks}
+//   drinks.wine.push(createdWine)
+//   this.setState({drinks})
+//  }
+//  addNewBeer = (createdBeer) => {
+//    let drinks = {...this.state.drinks}
+//    drinks.beer.push(createdBeer)
+//    this.setState({drinks})
+//  }
+//  addNewCocktail = (createdCocktail) => {
+//   let drinks = {...this.state.drinks}
+//   drinks.cocktails.push(createdCocktail)
+//   this.setState({drinks})
+// }
 
   render() {
     return (
@@ -271,17 +298,17 @@ class App extends React.Component {
         <h3>All Wine</h3>
         {wines(this.state.drinks.wine)}
         <h4>Add New Wine</h4>
-        <NewWineForm addWine={this.addNewWine}/>
+        <NewWineForm addWine={this.sendNewWineToServer}/>
 
         <h3>All Beers</h3>
         {beers(this.state.drinks.beer)}
         <h4>Add New Beer</h4>
-        <NewBeerForm addBeer={this.addNewBeer}/>
+        <NewBeerForm addBeer={this.sendNewBeerToServer}/>
 
         <h4>All Cocktails</h4>
         {cocktails(this.state.drinks.cocktails)}
         <h3>Add New Cocktail</h3>
-        <NewCocktailForm addCocktail={this.addNewCocktail} />
+        <NewCocktailForm addCocktail={this.sendNewCocktailToServer} />
       </div>
     )
   }
