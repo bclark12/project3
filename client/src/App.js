@@ -16,7 +16,7 @@ const wine = ({name, type, year, description}) => {
 const wineList = (wines) => {
   return (
     <div>
-      <h3>All Wine</h3>
+      
       <ul>
         {wines.map(wine)}
       </ul>
@@ -44,7 +44,7 @@ const beer = ({name, type, color, description}) => {
 const beerList = (beers) => {
   return (
     <div>
-      <h3>All Beers</h3>
+      
       <ul>
         {beers.map(beer)}
       </ul>
@@ -71,7 +71,7 @@ const cocktail = ({name, liquor, description}) => {
 const cocktailList = (cocktails) => {
   return (
     <div>
-      <h4>All Cocktails</h4>
+      
       <ul>
         {cocktails.map(cocktail)}
       </ul>
@@ -86,19 +86,19 @@ const cocktails = (cocktails) => {
 }
 
 
-class NewBottleForm extends React.Component {
+class NewWineForm extends React.Component {
   state = {
-    newBottle: {name: "", year: "", description: ""}
+    newWine: {name: "", type: "", year: "", description: ""}
   }
 
   handleTextInput = (evnt) => {
-    let newBottle = {...this.state.newBottle}
-    newBottle[evnt.target.name] = evnt.target.value
-    this.setState({newBottle})
+    let newWine = {...this.state.newWine}
+    newWine[evnt.target.name] = evnt.target.value
+    this.setState({newWine})
   }
   handleSubmit = (evnt) => {
     evnt.preventDefault();
-    this.props.addBottle(this.state.newBottle)
+    this.props.addWine(this.state.newWine)
   }
 
   render() {
@@ -109,6 +109,12 @@ class NewBottleForm extends React.Component {
           name="name"
           onChange={this.handleTextInput}
           placeholder="Bottle Name"
+        />
+        <input 
+          type="text"
+          name="type"
+          onChange={this.handleTextInput}
+          placeholder="Wine Type"
         />
         <input
           type="number"
@@ -122,12 +128,103 @@ class NewBottleForm extends React.Component {
           onChange={this.handleTextInput}
           placeholder="Description"
         />
-        <input type="submit" value="Add New Bottle" />
+        <input type="submit" value="Add New Wine Bottle" />
       </form>
     )
   }
-
 }
+
+class NewBeerForm extends React.Component {
+  state = {
+    newBeer: {name: "", type: "", color: "", description: ""}
+  }
+
+  handleTextInput = (evnt) => {
+    let newBeer = {...this.state.newBeer}
+    newBeer[evnt.target.name] = evnt.target.value
+    this.setState({newBeer})
+  }
+  handleSubmit = (evnt) => {
+    evnt.preventDefault();
+    this.props.addBeer(this.state.newBeer)
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input 
+          type="text"
+          name="name"
+          onChange={this.handleTextInput}
+          placeholder="Beer Name"
+        />
+        <input 
+          type="text"
+          name="type"
+          onChange={this.handleTextInput}
+          placeholder="Beer Type"
+        />
+        <input 
+          type="text"
+          name="color"
+          onChange={this.handleTextInput}
+          placeholder="Color"
+        />
+        <input 
+          type="text"
+          name="description"
+          onChange={this.handleTextInput}
+          placeholder="Description"
+        />
+        <input type="submit" value="Add New Beer" />
+      </form>    
+    )
+  }
+}
+
+class NewCocktailForm extends React.Component {
+  state = {
+    newCocktail: {name: "", liquor: "", description: ""}
+  }
+
+  handleTextInput = (evnt) => {
+    let newCocktail = {...this.state.newCocktail}
+    newCocktail[evnt.target.name] = evnt.target.value
+    this.setState({newCocktail})
+  }
+  handleSubmit = (evnt) => {
+    evnt.preventDefault();
+    this.props.addCocktail(this.state.newCocktail)
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input 
+          type="text"
+          name="name"
+          onChange={this.handleTextInput}
+          placeholder="Cocktail Name"
+        />
+        <input 
+          type="text"
+          name="liquor"
+          onChange={this.handleTextInput}
+          placeholder="liquor"
+        />
+        <input 
+          type="text"
+          name="description"
+          onChange={this.handleTextInput}
+          placeholder="Description"
+        />
+        <input type="submit" value="Add New Cocktail" />
+      </form>
+    )
+  }
+}
+
+
 
 class App extends React.Component {
   state = {
@@ -150,26 +247,41 @@ class App extends React.Component {
   }
 //could possibly add if statement here once we have 
 
- addNewBottle = (createdBottle) => {
+ addNewWine = (createdWine) => {
   let drinks = {...this.state.drinks}
-  
-  drinks.wine[0].bottles.push(createdBottle)
+  drinks.wine.push(createdWine)
   this.setState({drinks})
-
-
  }
+ addNewBeer = (createdBeer) => {
+   let drinks = {...this.state.drinks}
+   drinks.beer.push(createdBeer)
+   this.setState({drinks})
+ }
+ addNewCocktail = (createdCocktail) => {
+  let drinks = {...this.state.drinks}
+  drinks.cocktails.push(createdCocktail)
+  this.setState({drinks})
+}
 
   render() {
     return (
 
       <div>
         <h1>Header Works</h1>
-        {/* <NewBottleForm addBottle={this.addNewBottle}/> */}
+        <h3>All Wine</h3>
         {wines(this.state.drinks.wine)}
+        <h4>Add New Wine</h4>
+        <NewWineForm addWine={this.addNewWine}/>
+
+        <h3>All Beers</h3>
         {beers(this.state.drinks.beer)}
+        <h4>Add New Beer</h4>
+        <NewBeerForm addBeer={this.addNewBeer}/>
+
+        <h4>All Cocktails</h4>
         {cocktails(this.state.drinks.cocktails)}
-
-
+        <h3>Add New Cocktail</h3>
+        <NewCocktailForm addCocktail={this.addNewCocktail} />
       </div>
     )
   }
