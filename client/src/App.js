@@ -247,6 +247,8 @@ class App extends React.Component {
   }
   componentDidMount = () => {
     this.getWinesFromServer()
+    this.getBeersFromServer()
+    this.getCocktailsFromServer()
   }
 
   getWinesFromServer = () => {
@@ -272,6 +274,58 @@ class App extends React.Component {
       , headers: { 'Content-Type': 'application/json'}
       }
     ).then(() => this.getWinesFromServer())
+  }
+
+  ///////////BEER
+  getBeersFromServer = () => {
+    fetch('/beer')
+      .then(res => res.json())
+      .then(listOfBeers => {
+        this.setBeerList(listOfBeers)
+      })
+      console.log(fetch('/beer').then(res => res.json()))
+  }
+
+  setBeerList = (list) => {
+    let drinks = {...this.state.drinks}
+    drinks.beer = list;
+    this.setState({ drinks })
+  }
+
+  sendNewBeerToServer = (newBeer) => {
+    fetch('/beer',
+      {
+        method: 'POST'
+      , body: JSON.stringify(newBeer)
+      , headers: { 'Content-Type': 'application/json'}
+      }
+    ).then(() => this.getBeersFromServer())
+  }
+  //////////COCKTAIL
+  wine
+  getCocktailsFromServer = () => {
+    fetch('/cocktail')
+      .then(res => res.json())
+      .then(listOfCocktails => {
+        this.setCocktailList(listOfCocktails)
+      })
+      console.log(fetch('/cocktail').then(res => res.json()))
+  }
+
+  setCocktailList = (list) => {
+    let drinks = {...this.state.drinks}
+    drinks.cocktails = list;
+    this.setState({ drinks })
+  }
+
+  sendNewCocktailToServer = (newCocktail) => {
+    fetch('/cocktail',
+      {
+        method: 'POST'
+      , body: JSON.stringify(newCocktail)
+      , headers: { 'Content-Type': 'application/json'}
+      }
+    ).then(() => this.getCocktailsFromServer())
   }
 
 //  addNewWine = (createdWine) => {
@@ -307,7 +361,7 @@ class App extends React.Component {
 
         <h4>All Cocktails</h4>
         {cocktails(this.state.drinks.cocktails)}
-        <h3>Add New Cocktail</h3>
+        <h4>Add New Cocktail</h4>
         <NewCocktailForm addCocktail={this.sendNewCocktailToServer} />
       </div>
     )
