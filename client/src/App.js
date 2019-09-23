@@ -360,7 +360,7 @@ class App extends React.Component {
         <h4>Add New Beer</h4>
         <NewBeerForm addBeer={this.sendNewBeerToServer}/>
 
-        <h4>All Cocktails</h4>
+        <h3>All Cocktails</h3>
         {cocktails(this.state.drinks.cocktails)}
         <h4>Add New Cocktail</h4>
         <NewCocktailForm addCocktail={this.sendNewCocktailToServer} />
