@@ -3,6 +3,9 @@ body {
   text-align: center;
   color: cornsilk;
 }
+h3 {
+  text-decoration: underline;
+}
 li {
   width: 60%;
   display: inline-block;
@@ -11,6 +14,7 @@ li {
   display: inline-block;
   width: 240px;
   color: cornsilk;
+  border: 1px solid grey;
 }
 input {
   padding: 0;
