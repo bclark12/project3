@@ -7,7 +7,9 @@ h1 {
   font-family: 'Fredericka the Great', cursive;
 }
 h3 {
-  text-decoration: underline;
+  border-bottom: 2px solid cornsilk;
+  border-top: 2px solid cornsilk;
+  padding-top: 10px;
   font-family: 'Cinzel Decorative', cursive;
 }
 h4 {
