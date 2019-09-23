@@ -350,19 +350,19 @@ class App extends React.Component {
 
       <div>
         <h1>Drink Log</h1>
-        <h3>All Wine</h3>
+        <h3>Wine</h3>
         {wines(this.state.drinks.wine)}
-        <h4>Add New Wine</h4>
+        <h4 class="add">Add New Wine</h4>
         <NewWineForm addWine={this.sendNewWineToServer}/>
 
-        <h3>All Beers</h3>
+        <h3>Beers</h3>
         {beers(this.state.drinks.beer)}
-        <h4>Add New Beer</h4>
+        <h4 class="add">Add New Beer</h4>
         <NewBeerForm addBeer={this.sendNewBeerToServer}/>
 
-        <h3>All Cocktails</h3>
+        <h3>Cocktails</h3>
         {cocktails(this.state.drinks.cocktails)}
-        <h4>Add New Cocktail</h4>
+        <h4 class="add">Add New Cocktail</h4>
         <NewCocktailForm addCocktail={this.sendNewCocktailToServer} />
       </div>
     )

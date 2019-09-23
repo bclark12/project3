@@ -3,18 +3,35 @@ body {
   text-align: center;
   color: cornsilk;
 }
+h1 {
+  font-family: 'Fredericka the Great', cursive;
+}
 h3 {
   text-decoration: underline;
+  font-family: 'Cinzel Decorative', cursive;
+}
+h4 {
+  font-family: 'Suranna', serif;
 }
 li {
   width: 60%;
   display: inline-block;
+}
+.add {
+  border: 2px solid grey;
+  width: 240px;
+  justify-content: center;
+  margin: auto;
+  margin-top: 30px;
+  
 }
 .form {
   display: inline-block;
   width: 240px;
   color: cornsilk;
   border: 1px solid grey;
+  margin-bottom: 40px;
+
 }
 input {
   padding: 0;
