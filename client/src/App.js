@@ -62,7 +62,7 @@ const cocktail = ({name, liquor, description}) => {
   return (
     <div>
       <h4>{name}</h4>
-      <li>{liquor}</li>
+      <li>liquor Type: {liquor}</li>
       <li>{description}</li>
     </div>
   )
