@@ -302,7 +302,7 @@ class App extends React.Component {
     ).then(() => this.getBeersFromServer())
   }
   //////////COCKTAIL
-  wine
+  
   getCocktailsFromServer = () => {
     fetch('/cocktail')
       .then(res => res.json())
