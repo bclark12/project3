@@ -103,7 +103,7 @@ class NewWineForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
         <input
           type="text"
           name="name"
@@ -151,7 +151,7 @@ class NewBeerForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
         <input 
           type="text"
           name="name"
@@ -199,7 +199,7 @@ class NewCocktailForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
         <input 
           type="text"
           name="name"
@@ -246,6 +246,7 @@ class App extends React.Component {
     }
   }
   componentDidMount = () => {
+
     this.getWinesFromServer()
     this.getBeersFromServer()
     this.getCocktailsFromServer()
@@ -348,7 +349,7 @@ class App extends React.Component {
     return (
 
       <div>
-        <h1>Header Works</h1>
+        <h1>Drink Log</h1>
         <h3>All Wine</h3>
         {wines(this.state.drinks.wine)}
         <h4>Add New Wine</h4>
