@@ -4,7 +4,7 @@ What problem does this app solve?
 
 The purpose of this project is to help people remember the different variety of drinks that they have tried, and to be able to describe them for future reference.
 
-Who is the end user of this
+Who is the end user of this App?
 
 The end user of this App is a connoisseur of fine spirits, and frequent brewery goers.
 
