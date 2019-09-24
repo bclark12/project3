@@ -355,7 +355,7 @@ class App extends React.Component {
         <h4 class="add">Add New Wine</h4>
         <NewWineForm addWine={this.sendNewWineToServer}/>
 
-        <h3>Beers</h3>
+        <h3>Beer</h3>
         {beers(this.state.drinks.beer)}
         <h4 class="add">Add New Beer</h4>
         <NewBeerForm addBeer={this.sendNewBeerToServer}/>
