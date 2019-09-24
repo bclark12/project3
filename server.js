@@ -17,6 +17,8 @@ const app = express()
  *
  */
 const { wineRouter } = require('./controllers/wine.js')
+const {beerRouter} = require('./controllers/beer')
+const {cocktailRouter} = require('./controllers/cocktail')
 
 
 /* Step 3
@@ -51,6 +53,8 @@ app.use(express.static(`${__dirname}/client/build`))
  */
 // app.use('/helloworld', templateRouter)
 app.use('/wine', wineRouter)
+app.use('/beer', beerRouter)
+app.use('/cocktail', cocktailRouter)
 
 /* Step 5
  *

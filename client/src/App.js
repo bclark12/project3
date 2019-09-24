@@ -62,7 +62,7 @@ const cocktail = ({name, liquor, description}) => {
   return (
     <div>
       <h4>{name}</h4>
-      <li>{liquor}</li>
+      <li>liquor Type: {liquor}</li>
       <li>{description}</li>
     </div>
   )
@@ -103,7 +103,7 @@ class NewWineForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
         <input
           type="text"
           name="name"
@@ -151,7 +151,7 @@ class NewBeerForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
         <input 
           type="text"
           name="name"
@@ -199,7 +199,7 @@ class NewCocktailForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form class="form" onSubmit={this.handleSubmit}>
         <input 
           type="text"
           name="name"
@@ -245,43 +245,126 @@ class App extends React.Component {
       ]
     }
   }
-//could possibly add if statement here once we have 
+  componentDidMount = () => {
 
- addNewWine = (createdWine) => {
-  let drinks = {...this.state.drinks}
-  drinks.wine.push(createdWine)
-  this.setState({drinks})
- }
- addNewBeer = (createdBeer) => {
-   let drinks = {...this.state.drinks}
-   drinks.beer.push(createdBeer)
-   this.setState({drinks})
- }
- addNewCocktail = (createdCocktail) => {
-  let drinks = {...this.state.drinks}
-  drinks.cocktails.push(createdCocktail)
-  this.setState({drinks})
-}
+    this.getWinesFromServer()
+    this.getBeersFromServer()
+    this.getCocktailsFromServer()
+  }
+
+  getWinesFromServer = () => {
+    fetch('/wine')
+      .then(res => res.json())
+      .then(listOfWines => {
+        this.setWineList(listOfWines)
+      })
+      console.log(fetch('/wine').then(res => res.json()))
+  }
+
+  setWineList = (list) => {
+    let drinks = {...this.state.drinks}
+    drinks.wine = list;
+    this.setState({ drinks })
+  }
+
+  sendNewWineToServer = (newWine) => {
+    fetch('/wine',
+      {
+        method: 'POST'
+      , body: JSON.stringify(newWine)
+      , headers: { 'Content-Type': 'application/json'}
+      }
+    ).then(() => this.getWinesFromServer())
+  }
+
+  ///////////BEER
+  getBeersFromServer = () => {
+    fetch('/beer')
+      .then(res => res.json())
+      .then(listOfBeers => {
+        this.setBeerList(listOfBeers)
+      })
+      console.log(fetch('/beer').then(res => res.json()))
+  }
+
+  setBeerList = (list) => {
+    let drinks = {...this.state.drinks}
+    drinks.beer = list;
+    this.setState({ drinks })
+  }
+
+  sendNewBeerToServer = (newBeer) => {
+    fetch('/beer',
+      {
+        method: 'POST'
+      , body: JSON.stringify(newBeer)
+      , headers: { 'Content-Type': 'application/json'}
+      }
+    ).then(() => this.getBeersFromServer())
+  }
+  //////////COCKTAIL
+  
+  getCocktailsFromServer = () => {
+    fetch('/cocktail')
+      .then(res => res.json())
+      .then(listOfCocktails => {
+        this.setCocktailList(listOfCocktails)
+      })
+      console.log(fetch('/cocktail').then(res => res.json()))
+  }
+
+  setCocktailList = (list) => {
+    let drinks = {...this.state.drinks}
+    drinks.cocktails = list;
+    this.setState({ drinks })
+  }
+
+  sendNewCocktailToServer = (newCocktail) => {
+    fetch('/cocktail',
+      {
+        method: 'POST'
+      , body: JSON.stringify(newCocktail)
+      , headers: { 'Content-Type': 'application/json'}
+      }
+    ).then(() => this.getCocktailsFromServer())
+  }
+
+//  addNewWine = (createdWine) => {
+//   let drinks = {...this.state.drinks}
+//   drinks.wine.push(createdWine)
+//   this.setState({drinks})
+//  }
+//  addNewBeer = (createdBeer) => {
+//    let drinks = {...this.state.drinks}
+//    drinks.beer.push(createdBeer)
+//    this.setState({drinks})
+//  }
+//  addNewCocktail = (createdCocktail) => {
+//   let drinks = {...this.state.drinks}
+//   drinks.cocktails.push(createdCocktail)
+//   this.setState({drinks})
+// }
 
   render() {
     return (
 
       <div>
-        <h1>Header Works</h1>
-        <h3>All Wine</h3>
+        <h1>Drink Log</h1>
+        <h3>Wine</h3>
         {wines(this.state.drinks.wine)}
-        <h4>Add New Wine</h4>
-        <NewWineForm addWine={this.addNewWine}/>
+        <h4 class="add">Add New Wine</h4>
+        <NewWineForm addWine={this.sendNewWineToServer}/>
 
-        <h3>All Beers</h3>
+        <h3>Beer</h3>
         {beers(this.state.drinks.beer)}
-        <h4>Add New Beer</h4>
-        <NewBeerForm addBeer={this.addNewBeer}/>
+        <h4 class="add">Add New Beer</h4>
+        <NewBeerForm addBeer={this.sendNewBeerToServer}/>
 
-        <h4>All Cocktails</h4>
+        <h3>Cocktails</h3>
         {cocktails(this.state.drinks.cocktails)}
-        <h3>Add New Cocktail</h3>
-        <NewCocktailForm addCocktail={this.addNewCocktail} />
+        <h4 class="add">Add New Cocktail</h4>
+        <NewCocktailForm addCocktail={this.sendNewCocktailToServer} />
+        <footer>Barrett Clark 2019</footer>
       </div>
     )
   }
