@@ -8,6 +8,6 @@ The end user of this App is a connoisseur of fine spirits, and frequent brewery 
 
 [Project Board](https://github.com/bclark12/project3/projects/1)
 
-[Project 3 wireframe](public/project3wireframe.jpg)
+[Project 3 wireframe](client/public/project3wireframe.jpg)
 
-[Project 3 erd](public/project3erd.jpg)
+[Project 3 erd](client/public/project3erd.jpg)
