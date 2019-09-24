@@ -31,7 +31,6 @@ li {
 .form {
   display: inline-block;
   width: 240px;
-  color: cornsilk;
   border: 1px solid grey;
   margin-bottom: 30px;
 
@@ -41,14 +40,19 @@ input {
   display: inline-block;
   height: 50px;
   width: 200px;
-
-
+  background-color: darkgray;
+}
+input, select, textarea{
+  color: cornsilk;
 }
 input:hover {
   background-color: grey;
 }
 input[type=text] {
   color: white;
+}
+footer {
+  padding-bottom: 7px; 
 }
 
 .App {
